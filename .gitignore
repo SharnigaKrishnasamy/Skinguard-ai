@@ -9,3 +9,5 @@ __pycache__/
 data/
 index/
 venv/
+model/samples/
+model/results/
