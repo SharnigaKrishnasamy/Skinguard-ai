@@ -1,0 +1,11 @@
+file,true_label,predicted_label,confidence,uncertain,rag_answer_received,source_count,sufficient_evidence,error
+akiec_ISIC_0028314.jpg,akiec,akiec,0.997,False,True,1,True,
+akiec_ISIC_0030387.jpg,akiec,bcc,0.7005,False,True,1,True,
+akiec_ISIC_0031292.jpg,akiec,akiec,0.9856,False,True,1,True,
+bcc_ISIC_0029564.jpg,bcc,bcc,0.8871,False,True,1,True,
+bcc_ISIC_0028747.jpg,bcc,bcc,0.9705,False,True,1,True,
+bcc_ISIC_0030094.jpg,bcc,bcc,0.9484,False,True,1,True,
+bkl_ISIC_0026263.jpg,bkl,bkl,0.6705,True,True,1,True,
+bkl_ISIC_0026262.jpg,bkl,akiec,0.4111,True,True,1,True,
+bkl_ISIC_0029878.jpg,bkl,bkl,0.6254,True,True,1,True,
+df_ISIC_0031827.jpg,df,bcc,0.5392,True,True,1,True,
