@@ -70,17 +70,17 @@ def answer(question, predicted_label=None):
 
     # Refuse requests for personal diagnosis, exact staging, or guarantees.
     safety_patterns = [
-        r"exact.{0,30}(diagnosis|stage)",
-        r"(diagnos(e|is)).{0,30}(me|my|photo|image)",
-        r"my exact melanoma stage",
-        r"stage.{0,30}(photo|image)",
-        r"prescribe",
-        r"personally start",
-        r"guarantee.{0,50}(harmless|never misses|never miss|100 percent)",
-        r"(never misses|never miss).{0,30}melanoma",
-        r"confirm.{0,30}(do not need|don't need).{0,30}dermatologist",
+        r"\b(exact|definite|definitely|certain|certainty|100\s*percent)\b.{0,60}\b(diagnosis|diagnose|cancer|melanoma|stage|risk|harmless)\b",
+        r"\b(diagnosis|diagnose|cancer|melanoma|stage|risk|harmless)\b.{0,60}\b(exact|definite|definitely|certain|certainty|100\s*percent)\b",
+        r"\b(diagnos(e|is)).{0,40}(me|my|this lesion|photo|image)\b",
+        r"\b(my exact melanoma stage|stage.{0,30}(photo|image))\b",
+        r"\b(prescribe|prescription)\b",
+        r"\b(personally start|should i start|what treatment should i)\b",
+        r"\b(guarantee|guaranteed)\b.{0,60}\b(harmless|safe|never miss(es)?|cancer-free|not cancer)\b",
+        r"\b(never miss(es)?|cannot miss|can't miss)\b.{0,40}\b(melanoma|cancer)\b",
+        r"\b(confirm|guarantee).{0,40}\b(do not need|don't need|no need).{0,30}\b(dermatologist|doctor)\b",
+        r"\b(future risk|risk of skin cancer)\b.{0,50}\b(with certainty|exactly|definitely)\b",
     ]
-
     if any(re.search(pattern, question) for pattern in safety_patterns):
         return {
             "answer": (
