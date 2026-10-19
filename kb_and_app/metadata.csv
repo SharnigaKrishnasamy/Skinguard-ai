@@ -1,0 +1,8 @@
+﻿doc_id,class_code,title,document_file,source_url,source_type
+DOC01,akiec,Actinic keratosis,docs/akiec.md,https://www.aad.org/public/diseases/skin-cancer/actinic-keratosis-overview,AAD
+DOC02,bcc,Basal cell carcinoma,docs/bcc.md,https://www.aad.org/public/diseases/skin-cancer/basal-cell-carcinoma,AAD
+DOC03,bkl,Benign keratosis-like lesions,docs/bkl.md,https://dermnetnz.org/topics/seborrhoeic-keratosis,DermNet
+DOC04,df,Dermatofibroma,docs/df.md,https://dermnetnz.org/topics/dermatofibroma,DermNet
+DOC05,mel,Melanoma,docs/mel.md,https://www.cancer.gov/types/skin/patient/melanoma-treatment-pdq,NCI
+DOC06,nv,Melanocytic nevi,docs/nv.md,https://dermnetnz.org/topics/melanocytic-naevus,DermNet
+DOC07,vasc,Vascular lesions,docs/vasc.md,https://dermnetnz.org/topics/vascular-proliferations-and-abnormalities-of-blood-vessels,DermNet
