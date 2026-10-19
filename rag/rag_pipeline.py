@@ -1,4 +1,5 @@
-﻿import re
+﻿
+import re
 import sys
 from pathlib import Path
 
@@ -10,75 +11,146 @@ if str(KB_DIR) not in sys.path:
 
 from knowledge_base import load_knowledge_base
 
+
 CLASS_KEYWORDS = {
-    "akiec": ["akiec", "actinic keratosis", "solar keratosis"],
-    "bcc": ["bcc", "basal cell carcinoma"],
-    "bkl": ["bkl", "benign keratosis", "seborrhoeic keratosis", "seborrheic keratosis"],
-    "df": ["df", "dermatofibroma"],
-    "mel": ["mel", "melanoma"],
-    "nv": ["nv", "melanocytic nevus", "melanocytic naevus", "mole", "moles"],
-    "vasc": ["vasc", "vascular lesion", "vascular lesions"],
+    "akiec": [
+        "akiec",
+        "actinic keratosis",
+        "solar keratosis",
+    ],
+    "bcc": [
+        "bcc",
+        "basal cell carcinoma",
+    ],
+    "bkl": [
+        "bkl",
+        "benign keratosis",
+        "seborrhoeic keratosis",
+        "seborrheic keratosis",
+    ],
+    "df": [
+        "df",
+        "dermatofibroma",
+    ],
+    "mel": [
+        "mel",
+        "melanoma",
+    ],
+    "nv": [
+        "nv",
+        "melanocytic nevus",
+        "melanocytic naevus",
+        "mole",
+        "moles",
+    ],
+    "vasc": [
+        "vasc",
+        "vascular lesion",
+        "vascular lesions",
+    ],
 }
 
 
 def answer(question, predicted_label=None):
-    """Return educational information with its source."""
+    """Return educational information and its source."""
 
     kb = load_knowledge_base()
     question = (question or "").strip().lower()
 
+    # Handle an empty question.
     if not question:
         return {
-            "answer": "Please enter a question about skin-lesion information.",
+            "answer": (
+                "Please enter a question about "
+                "skin-lesion information."
+            ),
             "sources": [],
             "sufficient_evidence": False,
         }
 
     selected_code = None
 
-    # Prefer explicit condition names in the user's question.
+    # Match complete keywords instead of arbitrary substrings.
+    # This reduces accidental matches for short terms like "mel".
     for code, keywords in CLASS_KEYWORDS.items():
-        if any(keyword in question for keyword in keywords):
+        if any(
+            re.search(
+                r"\b" + re.escape(keyword) + r"\b",
+                question,
+            )
+            for keyword in keywords
+        ):
             selected_code = code
             break
 
-    # Use the predicted label only when the question has no known condition.
+    # Use a valid predicted label only if the question
+    # does not mention a recognized category.
     valid_codes = set(kb.keys())
     label = (predicted_label or "").strip().lower()
 
     if selected_code is None and label in valid_codes:
         selected_code = label
 
+    # Handle questions that do not match a known topic.
     if selected_code is None:
         return {
             "answer": (
-                "I could not identify a relevant topic in the knowledge base. "
-                "Please mention a specific skin-lesion category, or consult "
-                "a dermatologist for medical advice."
+                "I could not identify a relevant topic in "
+                "the knowledge base. Please mention a specific "
+                "skin-lesion category, or consult a dermatologist "
+                "for medical advice."
             ),
             "sources": [],
             "sufficient_evidence": False,
         }
 
-    document = kb[selected_code]
+    # Handle a missing document safely.
+    document = kb.get(selected_code)
 
+    if not document:
+        return {
+            "answer": (
+                "Information for this category is currently "
+                "unavailable in the knowledge base."
+            ),
+            "sources": [],
+            "sufficient_evidence": False,
+        }
+
+    # Return educational content and its source.
     return {
         "answer": (
             document["content"]
             + "\n\nThis information is educational only and is not a "
             "medical diagnosis. Consult a dermatologist for assessment."
         ),
-        "sources": [{
-            "title": document["title"],
-            "url": document["source_url"],
-        }],
+        "sources": [
+            {
+                "title": document["title"],
+                "url": document["source_url"],
+            }
+        ],
+        # A matching document is available; this does not
+        # mean clinical evidence has been independently verified.
         "sufficient_evidence": True,
     }
 
 
 if __name__ == "__main__":
-    for question in ["What is melanoma?", "What is dermatofibroma?"]:
+    test_questions = [
+        "What is melanoma?",
+        "What is dermatofibroma?",
+        "Tell me about something unrelated",
+        "",
+    ]
+
+    for question in test_questions:
         result = answer(question)
-        print("\nQuestion:", question)
-        print("Selected source:", result["sources"])
-        print("Sufficient evidence:", result["sufficient_evidence"])
+
+        print("\nQuestion:", repr(question))
+        print("Answer:", result["answer"][:200])
+        print("Sources:", result["sources"])
+        print(
+            "Knowledge-base topic found:",
+            result["sufficient_evidence"],
+        )

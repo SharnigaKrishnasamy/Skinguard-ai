@@ -1,4 +1,5 @@
-﻿import sys
+﻿
+import sys
 import unittest
 from pathlib import Path
 
@@ -38,6 +39,12 @@ class TestRAGPipeline(unittest.TestCase):
             set(result.keys()),
             {"answer", "sources", "sufficient_evidence"}
         )
+
+    def test_unrelated_question_returns_no_source(self):
+        result = answer("Tell me about something unrelated")
+
+        self.assertFalse(result["sufficient_evidence"])
+        self.assertEqual(result["sources"], [])
 
 
 if __name__ == "__main__":
