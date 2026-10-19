@@ -1,0 +1,5 @@
+bug_id,issue,severity,owner,status,notes
+BUG-001,Model prediction differs from expected label in 5 of 21 test images,High,Model team,Open,"Review misclassified samples; small test set, not clinical validation."
+BUG-002,Two of three melanoma test images were classified as other classes,Critical,Model team,Open,Review urgently; never use this prototype for diagnosis.
+BUG-003,Verify UI clearly displays warning when prediction is uncertain,High,UI team,Needs verification,Confirm uncertain predictions are not presented as definitive results.
+BUG-004,Review RAG answers and source relevance for all test questions,Medium,RAG team,Pending review,Source count alone does not prove answer correctness.
