@@ -46,6 +46,20 @@ class TestRAGPipeline(unittest.TestCase):
         self.assertFalse(result["sufficient_evidence"])
         self.assertEqual(result["sources"], [])
 
+    def test_answer_includes_medical_safety_disclaimer(self):
+        result = answer("What is melanoma?")
+        answer_text = result["answer"].lower()
+
+        self.assertIn("educational only", answer_text)
+        self.assertIn("not a medical diagnosis", answer_text)
+        self.assertIn("consult a dermatologist", answer_text)
+
+    def test_sources_are_a_list(self):
+        result = answer("What is melanoma?")
+
+        self.assertIsInstance(result["sources"], list)
+        self.assertGreater(len(result["sources"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
