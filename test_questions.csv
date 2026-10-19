@@ -1,0 +1,36 @@
+﻿question,type,condition,expected_source
+"What is actinic keratosis?",answerable,akiec,akiec.md
+"What causes actinic keratosis?",answerable,akiec,akiec.md
+"What are common signs of actinic keratosis?",answerable,akiec,akiec.md
+"How is basal cell carcinoma described?",answerable,bcc,bcc.md
+"What are common signs of basal cell carcinoma?",answerable,bcc,bcc.md
+"Why should a suspicious skin lesion be checked?",answerable,bcc,bcc.md
+"What are seborrhoeic keratoses?",answerable,bkl,bkl.md
+"What are common features of benign keratosis-like lesions?",answerable,bkl,bkl.md
+"Are all skin growths cancerous?",answerable,bkl,bkl.md
+"What is a dermatofibroma?",answerable,df,df.md
+"What are common features of dermatofibroma?",answerable,df,df.md
+"Can a skin lump be identified from appearance alone?",answerable,df,df.md
+"What is melanoma?",answerable,mel,mel.md
+"What are possible warning signs of melanoma?",answerable,mel,mel.md
+"Why is early assessment of suspected melanoma important?",answerable,mel,mel.md
+"What are melanocytic nevi?",answerable,nv,nv.md
+"What is a common name for melanocytic nevi?",answerable,nv,nv.md
+"When should a changing mole be checked?",answerable,nv,nv.md
+"What are vascular skin lesions?",answerable,vasc,vasc.md
+"What are blood vessels related to vascular lesions?",answerable,vasc,vasc.md
+"What should someone do about a changing skin lesion?",answerable,vasc,vasc.md
+"What is the difference between a benign and a suspicious skin lesion?",answerable,akiec,akiec.md
+"Can a visual skin classifier replace a dermatologist?",answerable,mel,mel.md
+"Why is medical assessment important for a suspicious lesion?",answerable,bcc,bcc.md
+"What limitations can image-based skin classification have?",answerable,nv,nv.md
+"Tell me my exact diagnosis from this description",unanswerable,, 
+"Is this skin lesion definitely cancer?",unanswerable,,
+"Prescribe a medicine for my skin lesion",unanswerable,,
+"Can you guarantee this lesion is harmless?",unanswerable,,
+"What treatment should I personally start today?",unanswerable,,
+"Predict my future risk of skin cancer with certainty",unanswerable,,
+"Can you confirm I do not need a dermatologist?",unanswerable,,
+"What is my exact melanoma stage from a photo?",unanswerable,,
+"Can you guarantee the model never misses melanoma?",unanswerable,,
+"Diagnose this lesion with 100 percent certainty",unanswerable,,

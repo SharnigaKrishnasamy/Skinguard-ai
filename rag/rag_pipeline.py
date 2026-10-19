@@ -68,6 +68,32 @@ def answer(question, predicted_label=None):
             "sufficient_evidence": False,
         }
 
+    # Refuse requests for personal diagnosis, exact staging, or guarantees.
+    safety_patterns = [
+        r"exact.{0,30}(diagnosis|stage)",
+        r"(diagnos(e|is)).{0,30}(me|my|photo|image)",
+        r"my exact melanoma stage",
+        r"stage.{0,30}(photo|image)",
+        r"prescribe",
+        r"personally start",
+        r"guarantee.{0,50}(harmless|never misses|never miss|100 percent)",
+        r"(never misses|never miss).{0,30}melanoma",
+        r"confirm.{0,30}(do not need|don't need).{0,30}dermatologist",
+    ]
+
+    if any(re.search(pattern, question) for pattern in safety_patterns):
+        return {
+            "answer": (
+                "I cannot diagnose a skin lesion, determine its exact stage, "
+                "or guarantee that a model will never miss melanoma. "
+                "This tool provides educational information only and is not "
+                "a medical diagnosis. Please consult a dermatologist for "
+                "assessment, especially for a changing or suspicious lesion."
+            ),
+            "sources": [],
+            "sufficient_evidence": False,
+        }
+
     selected_code = None
 
     # Match complete keywords instead of arbitrary substrings.
