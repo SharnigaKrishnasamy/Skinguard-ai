@@ -17,3 +17,6 @@ model/results/
 
 # Local metadata backup
 kb_and_app/metadata_backup.csv
+
+# Local backup files
+*.py.bak

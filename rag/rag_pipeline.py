@@ -143,7 +143,7 @@ def answer(question, predicted_label=None):
             "sufficient_evidence": False,
         }
 
-    # Return educational content and its source.
+        # Return educational content and all associated sources.
     return {
         "answer": (
             document["content"]
@@ -152,9 +152,10 @@ def answer(question, predicted_label=None):
         ),
         "sources": [
             {
-                "title": document["title"],
-                "url": document["source_url"],
+                "title": source["title"],
+                "url": source["source_url"],
             }
+            for source in document["documents"]
         ],
         # A matching document is available; this does not
         # mean clinical evidence has been independently verified.
