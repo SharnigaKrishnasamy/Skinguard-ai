@@ -1,0 +1,25 @@
+{
+  "class_order": [
+    "akiec",
+    "bcc",
+    "bkl",
+    "df",
+    "mel",
+    "nv",
+    "vasc"
+  ],
+  "image_size": 224,
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "architecture": "efficientnet_b0",
+  "temperature": 1.4906445741653442,
+  "uncertainty_threshold": 0.7
+}
